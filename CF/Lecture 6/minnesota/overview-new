@@ -1,0 +1,165 @@
+
+UNI OF MINNESOTA
+================
+About this Course
+ 
+Software is quickly becoming integral part of human life as we see more and more automation and technical advancements.
+Just like we expect car to work all the time and can't afford to break or reboot unexpectedly, software industry needs to continue to learn better way to build software if it were to become integral part of human life.
+
+In this course,  you will get an overview of
+  how software teams work?
+  What processes they use?
+  What are some of the industry standard methodologies?
+  What are pros and cons of each?
+
+You will learn enough to have meaningful conversation around software development processes.
+
+
+After completing this course, a learner will be able to 
+
+1) Apply core software engineering practices at conceptual level for a given problem. 
+2) Compare and contrast traditional, agile, and lean development methodologies at high level.  These include Waterfall, Rational Unified Process, V model, Incremental, Spiral models and overview of agile mindset 
+3) Propose a methodology best suited for a given situation
+ 
+ Offered by University of Minnesota
+
+The University of Minnesota is among the largest public research universities in the country, offering undergraduate, graduate, and professional students a multitude of opportunities for study and research.
+Located at the heart of one of the nation’s most vibrant, diverse metropolitan communities,students on the campuses in Minneapolis and St. Paul
+benefit from extensive partnerships with world-renowned health centers, international corporations, government agencies, and arts, nonprofit, and public service organizations.
+
+
+
+Syllabus - What you will learn from this course
+
+
+
+
+Week 1 - Software development processes : Part 1    6 hours to complete
+
+In this module and next one, we will learn about various software development processes at a high level to understand what is involved in each of these processes. In this module, we will cover Requirements and Architecture.
+
+11 videos (Total 69 min), 1 reading, 9 quizzes
+11 videos
+
+Why Take This Course?			3m
+Motivation and Course Intro		3m
+What software development looks like	9m
+Why do we need requirements?		4m
+Requirements vs Specification		4m
+Non-functional Requirements		3m
+
+WRSPM7m
+WRSPM Model: Real-world Example		7m
+Software Architecture: Definition	7m
+Software Architecture: Models		13m
+Software Architecture: Process		5m
+
+
+1 reading
+Welcome to the course			5m
+
+9 practice exercises
+What software development looks like	30m
+Why do we need requirements?		30m
+Requirements vs Specification		30m
+Non-functional Requirements		30m
+WRSPM Quiz				30m
+
+Software Architecture: Definition3	0m
+Software Architecture Models		30m
+Software Architecture: Process		30m
+Requirements and Architecture		30m
+
+
+Week 2 - Software Development Processes : Part 2   6 hours to complete
+
+In this module, we will learn about processes that are used to implement the software, verify and validate the software, deploy the software and maintain the software.
+
+12 videos (Total 75 min)
+
+12 videos
+Software Design: Introduction		6m
+Software Design: Modularity		4m
+Software Design: Coupling		4m
+Software Design: Cohesion		4m
+
+Implementation	 			4m
+Deployment				4m
+Deployment: Rollback			3m
+Deployment: Cutover Strategies		9m
+Software Testing: Introduction		9m
+Software Testing: Definitions		7m
+Software Testing: Strategies		11m
+Software Testing: Perspectives		5m
+
+10 practice exercises
+
+Software Design: Introduction		30m
+Software Design: Modularity		30m
+Software Design: Coupling		30m
+Software Design: Cohesion		30m
+Implementation	 			30m
+Deployment				30m
+Deployment: Rollback			30m
+Deployment: Cutover Strategies		30m
+Software Testing: Introduction3		0m
+Design, Implementation, and Testing	30m
+
+
+Week 3 - Software Development Models: Traditional Models  5 hours to complete
+
+In this module we will learn about various traditional models like waterfall, RUP, Incremental, and Spiral models.
+
+9 videos (Total 73 min)
+9 videos
+
+
+Software Development Models		8m
+Waterfall Model				6m
+V-Model	  				3m
+Sashimi Model				4m
+Incremental Models			4m
+Unified Process and its Variants	13m
+Spiral Model	    			9m
+Phase Gates / Stage Gates		8m
+Applying Software Development Models	13m
+
+4 practice exercises
+
+Waterfall methods			30m
+Waterfall and Incremental
+    Software Development Models		30m
+Unified and Spiral Processes		30m
+Traditional Software Development Models	35m
+
+
+Week 4 - Software Development Models: Agile and Lean   5 hours to complete 
+
+In this module, we will learn about agile and modern techniques of software development. We will also learn about techniques that helps you learn faster about your market, your users, and your product.
+
+9 videos (Total 58 min), 2 readings, 4 quizzes
+9 videos
+
+Why Agile?				4m
+Agile Manifesto and Principles		7m
+Agile Frameworks    			3m
+Scrum					8m
+Kanban					9m
+Agile and Lean Summary			2m
+
+Lean Startup   				14m
+Model Selection: When to use which model 6m
+What Next?	      	     	   	 41s
+
+2 readings
+
+Watch Agile Manifesto Video		5m
+Video - Agile Manifesto Explained	30m
+
+3 practice exercises
+Agile Mindset				20m
+Agile Frameworks and models		30m
+Agile & Lean Software Development	30m
+
+
+ 
