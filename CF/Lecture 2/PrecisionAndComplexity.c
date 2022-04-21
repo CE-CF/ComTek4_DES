@@ -22,9 +22,7 @@ void doub2mydouble(double arg, myfloat_type *res)
 {
    int exponent;
    double temp;
-   //printf("exponent = ceil(%lf/%lf) = %lf\n",log(fabs(arg)),log(2), ceil( log(fabs(arg))/log(2) ));
-   exponent = ceil( log(fabs(arg))/log(2) ); //base 2 logarithm
-   //printf("mantissa = %lf*2^(7-%d)\n\n",arg, exponent);
+   exponent = ceil( log(fabs(arg))/log(2) );
    temp=arg*pow(2,7-exponent);
    res->mantissa = (signed char)temp;
    res->exponent = (exponent-7);
@@ -75,40 +73,74 @@ double randfrom(double min, double max)
     printf("Result is -5 + %lf\n\n",(rand() / div));*/
     return min + (rand() / div);
 }
-
-int main() {
-	double da[100];
-	// Pas på her, dunno hvad det her gør! <<<<<<<<<<
-	myfloat_type* mda = calloc(100, sizeof(myfloat_type));
-   	// Pas på her, dunno hvad det her gør! <<<<<<<<<<
-
+void task1(double *array, double min, double max, int size)
+{
+	printf("size of array is %d\n", size);
 	srand (time(NULL));
-	for (int i=0; i<100; i++){
-		da[i] = randfrom(-5.000, 5.000);
-		doub2mydouble(da[i], (mda+i));
+	for (int i=0; i<size; i++){
+		array[i] = randfrom(min, max);
 	}
-	
-	double mdaConvert[100];
-	for (int i=0; i<100; i++){
-		mdaConvert[i] = myfloat2double(mda+i);
+}
+void task2(double *double_array, myfloat_type *myfloat_type_array, int size)
+{
+	for (int i=0; i<size; i++, myfloat_type_array++){
+		doub2mydouble(double_array[i], (myfloat_type_array));
 	}
-	// Udregn mean af da og mdaConvert
+}
+void task3and6(double *double_array1, double *double_array2, myfloat_type *myfloat_type_array, double *result, int size)
+{
 	double res_da; 
 	double res_mda;
-	for (int i = 0; i<100; i++){
-		res_da += da[i];
-		res_mda += mdaConvert[i];
+	for (int i=0; i<size; i++, myfloat_type_array++){
+		double_array1[i] = myfloat2double(myfloat_type_array);
+		res_da += double_array2[i];
+		res_mda += double_array1[i];
 	}
-	res_da = res_da/100;
-	res_mda = res_mda/100;
+	
+	res_da = res_da/size;
+	res_mda = res_mda/size;
 
-	double relError;
+	*result = fabs(100-(res_mda/res_da)*100);
+}
+void task4and5(double *double_array1, double *double_array2, myfloat_type *myfloat_type_array1, myfloat_type *myfloat_type_array2, int size)
+{
+	for (int i=0; i<size; i++, myfloat_type_array1++, myfloat_type_array2++){
+		double_array1[i] = pow(double_array2[i],2);
+		mult_float(myfloat_type_array2, myfloat_type_array2, myfloat_type_array1);
+	}
+}
 
-	relError = fabs(100-(res_mda/res_da)*100);
+void task7(double *double_array, struct timeval, double *value, double *result, int size)
+{
+	gettimeofday(&start, NULL);
+	for (int i=0; i<size;i++){
+		*value = double_array[i];
+		printf("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% #%d\n\n",i);
+		printf("da: %lf \n", double_array[i]);
+		printf(" a: %lf\n\n", *value);
+	}
+	gettimeofday(&end, NULL);
+	*result = end.tv_sec + end.tv_usec / 1e6 - start.tv_sec - start.tv_usec/1e6;
+}
+int main() {
+	#define SIZE 100
+	printf("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n");
+	printf("Task 1 & 2\n");
+	printf("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n\n");
+	double da[SIZE];
+	myfloat_type* mda = calloc(SIZE, sizeof(myfloat_type));
+	task1(da, -5.000, 5.000, SIZE);
+	task2(da, mda, SIZE);
+	printf("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n");
+	// Udregn mean af da og mdaConvert
+	
 
 	printf("Task 3\n");
 	printf("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n\n");
-	/*for (int i=0; i<100; i++){
+	double mdaConvert[SIZE];	
+	double relError;
+	task3and6(mdaConvert, da, mda, &relError, SIZE);
+	/*for (int i=0; i<SIZE; i++){
 		/printf("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% #%d\n\n",i);
 		printf("  mda.exponent: %d \n", (mda+i)->exponent);
 		printf("  mda.mantissa: %d \n", (mda+i)->mantissa);
@@ -117,50 +149,21 @@ int main() {
 	
 	}
 	printf("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n\n");*/
-	
-	printf("result of da[0]+da[1]+........+da[n]/n                       : %lf\n", res_da);
-	printf("result of mdaconvert[0]+mdaconvert[1]+........+mdaconvert[n] : %lf\n\n", res_mda);
+
 	printf("Relative error is: %lf %%\n\n", relError);
+	printf("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n");
+	printf("Task 4 & 5\n");
 	printf("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n\n");
-	
-
-	////
-	double da2[100];
-	for (int i=0; i<100; i++){
-		//printf("Iteration: %d:\n", i);
-		//printf("Før pow: %lf \n", da[i]);
-		da2[i] = pow(da[i],2);
-		//printf("Efter pow: %lf \n\n", da2[i]);
-	}
-
-	/////
-
-	myfloat_type* mda2 = calloc(100, sizeof(myfloat_type));
-
-	for (int i=0; i<100; i++){
-		mult_float(mda+i,mda+i,mda2+i);
-	}
-	/////
-	double mdaConvert2[100];
-	for (int i=0; i<100; i++){
-		mdaConvert2[i] = myfloat2double(mda2+i);
-	}
-	// Udregn mean af da og mdaConvert
-	double res_da2; 
-	double res_mda2;
-	for (int i = 0; i<100; i++){
-		res_da2 += da2[i];
-		res_mda2 += mdaConvert2[i];
-	}
-	res_da2 = res_da2/100;
-	res_mda2 = res_mda2/100;
-
-	double relError2;
-
-	relError2 = fabs(100-(res_mda2/res_da2)*100);
+	double da2[SIZE];
+	myfloat_type* mda2 = calloc(SIZE, sizeof(myfloat_type));
+	task4and5(da2, da, mda2, mda, SIZE);
+	printf("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n");
 	printf("Task 6\n");
 	printf("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n\n");
-	/*for (int i=0; i<100; i++){
+	double mdaConvert2[SIZE];
+	double relError2;
+	task3and6(mdaConvert2, da2, mda2, &relError2, SIZE);
+	/*for (int i=0; i<SIZE; i++){
 		/printf("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% #%d\n\n",i);
 		printf("  mda2.exponent: %d \n", (mda2+i)->exponent);
 		printf("  mda2.mantissa: %d \n", (mda2+i)->mantissa);
@@ -169,23 +172,15 @@ int main() {
 	
 	}
 	printf("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n\n");*/
-	
-	printf("result of da2[0]+da2[1]+........+da2[n]/n                       : %lf\n", res_da2);
-	printf("result of mda2convert[0]+mda2convert[1]+........+mda2convert[n] : %lf\n\n", res_mda2);
 	printf("Relative error is: %lf %%\n\n", relError2);
+	printf("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n");
+	printf("Task 7\n");
 	printf("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n\n");
-	/////
-	double * a = malloc(sizeof(double));
+	double a;
 	struct timeval start, end;
-	gettimeofday(&start, NULL);
-	for (int i=0; i<100;i++){
-		a = &da[i];
-		printf("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% #%d\n\n",i);
-		printf("da: %lf \n", da2[i]);
-		printf(" a: %lf\n\n", *(double*)a);
-	}
-	gettimeofday(&end, NULL);
-	double time_taken = end.tv_sec + end.tv_usec / 1e6 - start.tv_sec - start.tv_usec/1e6;
+	double time_taken;
+	task7(da, timeval, &a, &time_taken, SIZE);
+	
 	printf("Execution time for a*da is: %lf\n", time_taken);
 	///// Check execution time?
 
