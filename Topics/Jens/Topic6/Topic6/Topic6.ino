@@ -18,26 +18,28 @@ int number;                             // Variable for the random number in ran
 int resultISR;                          // Varible for ISR to save result
 int isrLost;                            // Variable for ISR to count lost messages
 
-//volatile int ISRoverflow = 0;           // ISR overflow thing 
 volatile int nrISR = 0;                 // Counter counting how many times isr has received 123 
-//volatile unsigned long last = 0;        
+       
 
 ////////////////////////////////////////////////////////////////////
 //    ISR
 ///////////////////////////////////////////////////////////////////
 
-ISR(INT0_vect, ISR_NAKED) {                         // ISR reacting to pin 2
-  PUSHREGS();                                       //  Pushes to registers
-  if (!k_running)                                   // If Kernel isn't running go to exit
+ISR(INT0_vect, ISR_NAKED) {                                   // ISR reacting to pin 2
+  PUSHREGS();                                                 //  Pushes to registers
+  if (!k_running)                                             // If Kernel isn't running go to exit
     goto exitt;
-   ki_receive(mPoint, &resultISR, &isrLost);        // Receive from message queue
-   Serial.print("ISR Received: ");                  // Print
-   Serial.println(resultISR);                       // Print
-   if (resultISR == 123){                           // Checks if message is 123
-    nrISR++;                                        // Increments counter
-    ki_send(msgQ, &nrISR);                          // Send count to task
+   if (ki_receive(mPoint, &resultISR, &isrLost)== -1)         // Receive from message queue
+    Serial.println("no message for me")                       // No message received
+   else{
+     Serial.print("ISR Received: ");                          // Print
+     Serial.println(resultISR);                               // Print
+     if (resultISR == 123){                                   // Checks if message is 123
+      nrISR++;                                                // Increments counter
+      ki_send(msgQ, &nrISR);                                  // Send count to task
+     }
    }
-  K_CHG_STAK();                                     // Something with stack???
+  K_CHG_STAK();                                               // Something with stack???
 
 exitt:
   POPREGS();                                        // Pops from registers
