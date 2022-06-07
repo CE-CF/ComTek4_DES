@@ -10,7 +10,8 @@ unsigned long counter;                  // Counter long
 
 void blinker(){
   while(1){
-    // Serial.println(kmillis()); // Uncomment to check blinker interval.. stays on and off for 50
+    Serial.print("Blinker: ");
+    Serial.println(k_millis()); // Uncomment to check blinker interval.. stays on and off for 50
     digitalWrite(13, !digitalRead(13)); // toggle the LED
     k_sleep(50);                        // Kernel sleep, this doesn't eat time from other tasks
   }
@@ -18,7 +19,8 @@ void blinker(){
 
 void writer(){
   while(1){
-    //Serial.println(k_millis());       // Uncomment to check writer interval
+    Serial.print("Writer: ");
+    Serial.println(k_millis());       // Uncomment to check writer interval
     counter += 1;                       // Counter
     Serial.print("Count: ");            
     Serial.println(counter);
