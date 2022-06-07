@@ -19,7 +19,7 @@ struct Rules {
 	char startByte;
 	char stopByte;
 	char escapeChar;
-	char escapeable[4];
+	char escapeable[3];
 } rules;
 
 // Data for each master defined as a struct
@@ -195,7 +195,7 @@ void generateFrame(int mastersInRange, char *resultFrame, struct Rules rules, in
 	char layer3[layer3_test_size]; 					// Char array at size to be able to insert escape chars
 	
 	for (int i = 0; i<layer3_test_size;i++){
-		layer3[i] = rand() % 128; // Fill data with ASCII from 33-127
+		layer3[i] = rand() % 128; // Fill data with ASCII from 0-127
 	}
 	int staticDataCounter = 9;
 	size_t myLayer3Size = (layer3_test_size+staticDataCounter);  // Length of the layer 3 data
@@ -285,7 +285,7 @@ int main(int argc, char *argv[]) {
 	struct Rules rules = {0x02, 0x03, 0x10, {0x02, 0x03, 0x10}};
 	
 	// Generate a test frame with <mir> number of masters in range
-	int mastersInRange = 14;
+	int mastersInRange = 3;
 	int testFrame_size = 0; 
 	generateFrame(mastersInRange, testFrame, rules, &testFrame_size);
 	int restored =0;
@@ -296,7 +296,7 @@ int main(int argc, char *argv[]) {
 	assignment5(testFrame);
 	assignment6(frame);
 	
-	/*
+	
 	printf("0x03 ASCII       : %c \n",0x03);
 	printf("0x03 DECIMAL     : %i \n",0x03);
 	printf("0x03 BINARY      : "BYTE_TO_BINARY_PATTERN, BYTE_TO_BINARY(0x03));
@@ -308,7 +308,7 @@ int main(int argc, char *argv[]) {
 	printf("\nRESTORED  ASCII  : %c \n",revxor);
 	printf("RESTORED  DECIMAL: %i \n",revxor);
 	printf("RESTORED  BINARY : "BYTE_TO_BINARY_PATTERN, BYTE_TO_BINARY(revxor));
-	*/
+	
 }
 
 
